@@ -11,7 +11,7 @@ const ProductsContainer = ({ products, addToCart }) => (
   <React.Fragment>
     <h1>Acme Store</h1>
     <CartLink />
-    <ProductsList title="Products">
+    <ProductsList>
       {products.map(product => (
         <ProductItem
           key={product.id}
