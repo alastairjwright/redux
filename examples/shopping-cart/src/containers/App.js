@@ -1,15 +1,15 @@
-import React from 'react'
-import ProductsContainer from './ProductsContainer'
-import CartContainer from './CartContainer'
+import React from "react";
+import ProductsContainer from "./ProductsContainer";
+import CartContainer from "./CartContainer";
+import { Router } from "@reach/router";
 
 const App = () => (
   <div>
-    <h2>Shopping Cart Example</h2>
-    <hr/>
-    <ProductsContainer />
-    <hr/>
-    <CartContainer />
+    <Router>
+      <ProductsContainer path="/" />
+      <CartContainer path="/cart" />
+    </Router>
   </div>
-)
+);
 
-export default App
+export default App;
