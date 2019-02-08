@@ -1,5 +1,10 @@
-import { combineReducers } from 'redux'
-import { RECEIVE_PRODUCTS, ADD_TO_CART } from '../constants/ActionTypes'
+import { combineReducers } from "redux";
+import {
+  RECEIVE_PRODUCTS,
+  REMOVE_FROM_CART,
+  ADD_TO_CART,
+  DECREASE_QUANTITY
+} from "../constants/ActionTypes";
 
 const products = (state, action) => {
   switch (action.type) {
@@ -7,11 +12,21 @@ const products = (state, action) => {
       return {
         ...state,
         inventory: state.inventory - 1
-      }
+      };
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        inventory: state.inventory + action.product.currentQuantity
+      };
+    case DECREASE_QUANTITY:
+      return {
+        ...state,
+        inventory: state.inventory + 1
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
 const byId = (state = {}, action) => {
   switch (action.type) {
@@ -19,38 +34,48 @@ const byId = (state = {}, action) => {
       return {
         ...state,
         ...action.products.reduce((obj, product) => {
-          obj[product.id] = product
-          return obj
+          obj[product.id] = product;
+          return obj;
         }, {})
-      }
-    default:
-      const { productId } = action
+      };
+    case REMOVE_FROM_CART: {
+      let { productId } = action.product;
       if (productId) {
         return {
           ...state,
           [productId]: products(state[productId], action)
-        }
+        };
       }
-      return state
+      return state;
+    }
+    default: {
+      let { productId } = action;
+      if (productId) {
+        return {
+          ...state,
+          [productId]: products(state[productId], action)
+        };
+      }
+      return state;
+    }
   }
-}
+};
 
 const visibleIds = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_PRODUCTS:
-      return action.products.map(product => product.id)
+      return action.products.map(product => product.id);
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default combineReducers({
   byId,
   visibleIds
-})
+});
 
-export const getProduct = (state, id) =>
-  state.byId[id]
+export const getProduct = (state, id) => state.byId[id];
 
 export const getVisibleProducts = state =>
-  state.visibleIds.map(id => getProduct(state, id))
+  state.visibleIds.map(id => getProduct(state, id));

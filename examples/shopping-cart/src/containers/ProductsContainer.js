@@ -1,23 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addToCart } from "../actions";
+import { increaseCartQuantity } from "../actions";
 import { getVisibleProducts } from "../reducers/products";
 import ProductItem from "../components/ProductItem";
 import ProductsList from "../components/ProductsList";
 import CartLink from "../components/CartLink";
 
-const ProductsContainer = ({ products, addToCart }) => (
+const ProductsContainer = ({ products, increaseCartQuantity }) => (
   <React.Fragment>
     <h1>Acme Store</h1>
     <CartLink />
     <ProductsList>
       {products.map(product => (
-        <ProductItem
-          key={product.id}
-          product={product}
-          onAddToCartClicked={() => addToCart(product.id)}
-        />
+        <div key={product.id}>
+          <ProductItem
+            product={product}
+            onAddToCartClicked={() => increaseCartQuantity(product.id)}
+          />
+        </div>
       ))}
     </ProductsList>
   </React.Fragment>
@@ -32,7 +33,7 @@ ProductsContainer.propTypes = {
       inventory: PropTypes.number.isRequired
     })
   ).isRequired,
-  addToCart: PropTypes.func.isRequired
+  increaseCartQuantity: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -41,5 +42,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addToCart }
+  { increaseCartQuantity }
 )(ProductsContainer);

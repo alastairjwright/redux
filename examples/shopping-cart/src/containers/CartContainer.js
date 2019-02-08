@@ -6,7 +6,7 @@ import { getTotal, getCartProducts } from "../reducers";
 import Cart from "../components/Cart";
 import { Link } from "@reach/router";
 
-const CartContainer = ({ products, total, checkout }) => (
+const CartContainer = ({ products, total, checkout, removeFromCart }) => (
   <React.Fragment>
     <Link to="/">x</Link>
     <Cart
