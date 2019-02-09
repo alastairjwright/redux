@@ -171,7 +171,7 @@ const Cart = ({
         width: 100%;
       `}
     >
-      <CartIcon src={require("../images/cart.svg")} alt="cart" />
+      <CartIcon src={`/images/cart.svg`} alt="cart" />
       <p
         css={css`
           color: ${colors.gray};

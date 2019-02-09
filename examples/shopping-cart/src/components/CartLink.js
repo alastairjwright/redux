@@ -31,7 +31,7 @@ const CartIcon = styled("img")`
 const CartLink = ({ productsQuantity }) => (
   <CartLinkStyled to="/cart">
     <span>
-      <CartIcon src={require("../images/cart.svg")} alt="cart" />
+      <CartIcon src={`/images/cart.svg`} alt="cart" />
       {productsQuantity ? productsQuantity : "Your cart is empty"}
     </span>
   </CartLinkStyled>
