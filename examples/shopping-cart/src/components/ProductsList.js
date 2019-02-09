@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+
+const ProductListContainer = styled("div")`
+  margin: 17px;
+`;
 
 const ProductsList = ({ children }) => (
-  <div>
+  <ProductListContainer>
     <div>{children}</div>
-  </div>
+  </ProductListContainer>
 );
 
 ProductsList.propTypes = {
