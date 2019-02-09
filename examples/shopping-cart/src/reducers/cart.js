@@ -35,10 +35,7 @@ const quantityById = (state = initialState.quantityById, action) => {
         [productId]: (state[productId] || 0) + 1
       };
     case REMOVE_FROM_CART:
-      console.log(state);
-      console.log(action.product.productId);
       delete state[action.product.productId];
-      console.log(state);
       return state;
     case DECREASE_QUANTITY:
       return {
