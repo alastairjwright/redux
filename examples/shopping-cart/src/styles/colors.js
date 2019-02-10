@@ -9,6 +9,9 @@ export default {
   backgroundGray: "#F4F5F7",
   closeCrossGray: "#D8D8D8",
   removeRed: "#CC1D39",
+  quantityOutline: "#EDEDED",
   quantityButtonText: "#8E939C",
-  horizontalRuleGray: "#dadada"
+  quantityButtonTextDisabled: "#D8D8D8",
+  horizontalRuleGray: "#dadada",
+  disabledButtonGray: "#F9F9F9"
 };

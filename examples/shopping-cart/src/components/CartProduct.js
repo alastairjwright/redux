@@ -137,15 +137,22 @@ const QuantityButton = styled("button")`
   font-size: 30px;
   padding: 0 0 4px 0;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${colors.blue};
     border: 1px solid ${colors.blue};
     color: ${colors.white};
   }
+
+  &:disabled {
+    background-color: ${colors.disabledButtonGray};
+    cursor: default;
+    color: ${colors.quantityButtonTextDisabled};
+  }
 `;
 
 const QuantitySpan = styled("span")`
-  border: 1px solid ${colors.closeCrossGray};
+  border-top: 1px solid ${colors.quantityOutline};
+  border-bottom: 1px solid ${colors.quantityOutline};
   flex-grow: 1;
   text-align: center;
   padding: 10px;
@@ -157,6 +164,7 @@ const Product = ({
   quantity,
   title,
   id,
+  inventory,
   onRemoveFromCartClicked,
   onDecreaseQuantityClicked,
   onIncreaseQuantityClicked
@@ -173,9 +181,19 @@ const Product = ({
       </ProductRightContainer>
     </ProductDetailsContainer>
     <QuantityControls>
-      <QuantityButton onClick={onDecreaseQuantityClicked}>-</QuantityButton>
+      <QuantityButton
+        onClick={onDecreaseQuantityClicked}
+        disabled={quantity > 0 ? "" : "disabled"}
+      >
+        -
+      </QuantityButton>
       <QuantitySpan>{quantity}</QuantitySpan>
-      <QuantityButton onClick={onIncreaseQuantityClicked}>+</QuantityButton>
+      <QuantityButton
+        onClick={onIncreaseQuantityClicked}
+        disabled={inventory > 0 ? "" : "disabled"}
+      >
+        +
+      </QuantityButton>
     </QuantityControls>
   </ProductContainer>
 );
@@ -185,6 +203,7 @@ Product.propTypes = {
   quantity: PropTypes.number,
   title: PropTypes.string,
   id: PropTypes.number,
+  inventory: PropTypes.number.isRequired,
   onRemoveFromCartClicked: PropTypes.func.isRequired,
   onDecreaseQuantityClicked: PropTypes.func.isRequired,
   onIncreaseQuantityClicked: PropTypes.func.isRequired

@@ -157,6 +157,7 @@ const Cart = ({
         title={product.title}
         price={product.price}
         quantity={product.quantity}
+        inventory={product.inventory}
         key={product.id}
         id={product.id}
         onRemoveFromCartClicked={() => removeFromCart(product.id)}
