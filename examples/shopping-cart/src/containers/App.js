@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { Global, css } from "@emotion/core";
 import colors from "../styles/colors";
 import { connect } from "react-redux";
-import { fetchProducts } from "../actions/getProducts";
+import { fetchProducts } from "../actions";
 
 const AppContainer = styled("div")`
   max-width: 1120px;
