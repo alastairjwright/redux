@@ -15,7 +15,7 @@ const CartLinkStyled = styled(Link)`
     color: ${colors.blue};
 
     img {
-      filter: brightness(0.5) sepia(0.5) hue-rotate(184deg) saturate(4);
+      filter: brightness(0.55) sepia(0.4) hue-rotate(170deg) saturate(4);
     }
   }
 `;
