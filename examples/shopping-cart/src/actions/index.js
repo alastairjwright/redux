@@ -6,11 +6,28 @@ const receiveProducts = products => ({
   products
 });
 
-export const getAllProducts = () => dispatch => {
-  shop.getProducts(products => {
-    dispatch(receiveProducts(products));
-  });
-};
+function getProducts() {
+  return fetch("http://tech.work.co/shopping-cart/products.json")
+    .then(handleErrors)
+    .then(response => response.json());
+}
+
+export function fetchProducts() {
+  return dispatch => {
+    return getProducts().then(json => {
+      dispatch(receiveProducts(json));
+      return json;
+    });
+  };
+}
+
+// Handle HTTP errors since fetch won't.
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
 
 const increaseCartQuantityUnsafe = productId => ({
   type: types.ADD_TO_CART,
