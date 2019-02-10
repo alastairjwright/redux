@@ -7,7 +7,7 @@ const ProductContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   margin-bottom: 9px;
-  align-items: flex-start;
+  align-items: center;
   font-size: 16px;
   width: 100%;
 `;
@@ -32,9 +32,9 @@ const PriceSpan = styled("span")`
   }
 `;
 
-const Product = ({ price, title }) => (
+const Product = ({ price, productTitle }) => (
   <ProductContainer>
-    <TitleSpan>{title}</TitleSpan>
+    <TitleSpan>{productTitle}</TitleSpan>
     <PriceSpan>${price}</PriceSpan>
   </ProductContainer>
 );
@@ -42,7 +42,7 @@ const Product = ({ price, title }) => (
 Product.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
-  title: PropTypes.string
+  productTitle: PropTypes.string
 };
 
 export default Product;

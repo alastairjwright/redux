@@ -162,7 +162,7 @@ const QuantitySpan = styled("span")`
 const Product = ({
   price,
   quantity,
-  title,
+  productTitle,
   id,
   inventory,
   onRemoveFromCartClicked,
@@ -172,10 +172,10 @@ const Product = ({
   <ProductContainer>
     <ProductDetailsContainer>
       <ProductImageContainer>
-        <ProductImage src={`/images/product_${id}.jpg`} alt={title} />
+        <ProductImage src={`/images/product_${id}.jpg`} alt={productTitle} />
       </ProductImageContainer>
       <ProductRightContainer>
-        <TitleSpan>{title}</TitleSpan>
+        <TitleSpan>{productTitle}</TitleSpan>
         <PriceSpan>${price}</PriceSpan>
         <RemoveButton onClick={onRemoveFromCartClicked}>Remove</RemoveButton>
       </ProductRightContainer>
@@ -201,7 +201,7 @@ const Product = ({
 Product.propTypes = {
   price: PropTypes.number,
   quantity: PropTypes.number,
-  title: PropTypes.string,
+  productTitle: PropTypes.string,
   id: PropTypes.number,
   inventory: PropTypes.number.isRequired,
   onRemoveFromCartClicked: PropTypes.func.isRequired,

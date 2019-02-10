@@ -112,11 +112,14 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
     <ProductImageContainer>
       <ProductImage
         src={`/images/product_${product.id}.jpg`}
-        alt={product.title}
+        alt={product.productTitle}
       />
     </ProductImageContainer>
     <ProductDetailsContainer>
-      <Product title={product.title} price={product.price} />
+      <Product
+        productTitle={product.productTitle}
+        price={product.price.value}
+      />
       <RemainingSpan>{product.inventory} Remaining</RemainingSpan>
       <AddToCartButton
         onClick={onAddToCartClicked}
@@ -130,8 +133,8 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
 
 ProductItem.propTypes = {
   product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    productTitle: PropTypes.string.isRequired,
+    price: PropTypes.object.isRequired,
     inventory: PropTypes.number.isRequired
   }).isRequired,
   onAddToCartClicked: PropTypes.func.isRequired

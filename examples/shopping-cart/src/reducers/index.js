@@ -17,7 +17,7 @@ export const getTotal = state =>
   getAddedIds(state)
     .reduce(
       (total, id) =>
-        total + getProduct(state, id).price * getQuantity(state, id),
+        total + getProduct(state, id).price.value * getQuantity(state, id),
       0
     )
     .toFixed(2);
