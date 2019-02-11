@@ -13,7 +13,7 @@ const setup = product => {
   return {
     component: component,
     actions: actions,
-    button: component.find("button"),
+    button: component.find("AddToCartButton"),
     product: component.find(Product)
   };
 };
@@ -24,7 +24,9 @@ describe("ProductItem component", () => {
   beforeEach(() => {
     productProps = {
       productTitle: "Product 1",
-      price: 9.99,
+      price: {
+        value: 9.99
+      },
       inventory: 6
     };
   });
@@ -40,7 +42,7 @@ describe("ProductItem component", () => {
 
   it("should render Add To Cart message", () => {
     const { button } = setup(productProps);
-    expect(button.text()).toMatch(/^Add to cart/);
+    expect(button.children().text()).toMatch(/^Add to cart/);
   });
 
   it("should not disable button", () => {
@@ -61,7 +63,7 @@ describe("ProductItem component", () => {
 
     it("should render Sold Out message", () => {
       const { button } = setup(productProps);
-      expect(button.text()).toMatch(/^Sold Out/);
+      expect(button.children().text()).toMatch(/^Sold Out/);
     });
 
     it("should disable button", () => {

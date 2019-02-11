@@ -26,6 +26,7 @@ const ProductContainer = styled("div")`
     margin-bottom: 28px;
   }
 `;
+ProductContainer.displayName = "ProductContainer";
 
 const ProductImageContainer = styled("div")`
   display: block;
@@ -39,6 +40,7 @@ const ProductImageContainer = styled("div")`
     position: relative;
   }
 `;
+ProductImageContainer.displayName = "ProductImageContainer";
 
 const ProductImage = styled("img")`
   display: block;
@@ -56,6 +58,7 @@ const ProductImage = styled("img")`
     object-fit: cover;
   }
 `;
+ProductImage.displayName = "ProductImage";
 
 const ProductDetailsContainer = styled("div")`
   box-sizing: border-box;
@@ -73,19 +76,7 @@ const ProductDetailsContainer = styled("div")`
     align-items: flex-start;
   }
 `;
-
-const RemainingSpan = styled("span")`
-  color: ${colors.gray};
-  display: block;
-  margin-bottom: 26px;
-  text-transform: uppercase;
-  flex-grow: 1;
-  font-size: 12px;
-
-  @media (min-width: ${breakpoints.desktop}px) {
-    font-size: 13px;
-  }
-`;
+ProductDetailsContainer.displayName = "ProductDetailsContainer";
 
 const AddToCartButton = styled("button")`
   background-color: ${colors.blue};
@@ -106,6 +97,7 @@ const AddToCartButton = styled("button")`
     cursor: default;
   }
 `;
+AddToCartButton.displayName = "AddToCartButton";
 
 const ProductItem = ({ product, onAddToCartClicked }) => (
   <ProductContainer>
@@ -119,8 +111,8 @@ const ProductItem = ({ product, onAddToCartClicked }) => (
       <Product
         productTitle={product.productTitle}
         price={product.price.value}
+        quantity={product.inventory}
       />
-      <RemainingSpan>{product.inventory} Remaining</RemainingSpan>
       <AddToCartButton
         onClick={onAddToCartClicked}
         disabled={product.inventory > 0 ? "" : "disabled"}
