@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 const ProductListContainer = styled("div")`
   margin: 17px;
 `;
+ProductListContainer.displayName = "ProductListContainer";
 
 const ProductsList = ({ children }) => (
   <ProductListContainer>
