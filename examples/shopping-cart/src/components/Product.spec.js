@@ -6,24 +6,28 @@ const setup = props => {
   const component = shallow(<Product {...props} />);
 
   return {
-    component: component
+    component: component,
+    title: component.find("TitleSpan"),
+    price: component.find("PriceSpan"),
+    remaining: component.find("RemainingSpan")
   };
 };
 
 describe("Product component", () => {
-  it("should render title and price", () => {
-    const { component } = setup({ productTitle: "Test Product", price: 9.99 });
-    expect(component.text()).toBe("Test Product - $9.99");
+  it("should render title", () => {
+    const { title } = setup({ productTitle: "Test Product" });
+    expect(title.children().text()).toBe("Test Product");
+  });
+
+  it("should render the price", () => {
+    const { price } = setup({ price: 9.99 });
+    expect(price.children().text()).toBe("$9.99");
   });
 
   describe("when given inventory", () => {
-    it("should render title, price, and inventory", () => {
-      const { component } = setup({
-        productTitle: "Test Product",
-        price: 9.99,
-        quantity: 6
-      });
-      expect(component.text()).toBe("Test Product - $9.99 x 6");
+    it("should render inventory", () => {
+      const { remaining } = setup({ quantity: 6 });
+      expect(remaining.children().text()).toBe("6 Remaining");
     });
   });
 });
