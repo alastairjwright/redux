@@ -1,73 +1,44 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render } from "enzyme";
+import { Provider } from "react-redux";
+import configureMockStore from "redux-mock-store";
 import Cart from "./Cart";
-import Product from "./Product";
+import CartProduct from "./CartProduct";
 
-const setup = (total, products = []) => {
+const mockStore = configureMockStore();
+const store = mockStore({});
+
+const setup = (total, tax, grandTotal, products = []) => {
   const actions = {
     onCheckoutClicked: jest.fn()
   };
 
-  const component = shallow(
-    <Cart products={products} total={total} {...actions} />
+  const component = render(
+    <Provider store={store}>
+      <Cart
+        products={products}
+        total={total}
+        tax={tax}
+        grandTotal={grandTotal}
+        {...actions}
+      />
+    </Provider>
   );
 
   return {
     component: component,
     actions: actions,
-    button: component.find("button"),
-    products: component.find(Product),
-    em: component.find("em"),
-    p: component.find("p")
+    checkoutButton: component.find("CheckoutButton"),
+    cartProducts: component.find(CartProduct),
+    subtotalText: component.find(".subtotal .text"),
+    subtotalNumber: component.find(".number"),
+    errorMessage: component.find(".error-message")
   };
 };
 
 describe("Cart component", () => {
-  it("should display total", () => {
-    const { p } = setup("76");
-    expect(p.text()).toMatch(/^Total: \$76/);
-  });
-
   it("should display add some products message", () => {
-    const { em } = setup();
-    expect(em.text()).toMatch(/^Please add some products to cart/);
-  });
-
-  it("should disable button", () => {
-    const { button } = setup();
-    expect(button.prop("disabled")).toEqual("disabled");
-  });
-
-  describe("when given product", () => {
-    const product = [
-      {
-        id: 1,
-        productTitle: "Product 1",
-        price: 9.99,
-        quantity: 1
-      }
-    ];
-
-    it("should render products", () => {
-      const { products } = setup("9.99", product);
-      const props = {
-        productTitle: product[0].productTitle,
-        price: product[0].price.value,
-        quantity: product[0].quantity
-      };
-
-      expect(products.at(0).props()).toEqual(props);
-    });
-
-    it("should not disable button", () => {
-      const { button } = setup("9.99", product);
-      expect(button.prop("disabled")).toEqual("");
-    });
-
-    it("should call action on button click", () => {
-      const { button, actions } = setup("9.99", product);
-      button.simulate("click");
-      expect(actions.onCheckoutClicked).toBeCalled();
-    });
+    const { errorMessage } = setup();
+    expect(errorMessage.text()).toBe("Please add some products to your cart.");
   });
 });

@@ -114,6 +114,7 @@ const CheckoutButton = styled("button")`
     border-radius: 20px;
   }
 `;
+CheckoutButton.displayName = "CheckoutButton";
 
 const CartTotals = styled("div")`
   display: flex;
@@ -174,6 +175,7 @@ const Cart = ({
     >
       <CartIcon src={`/images/cart.svg`} alt="cart" />
       <p
+        className="error-message"
         css={css`
           color: ${colors.gray};
           text-align: center;
